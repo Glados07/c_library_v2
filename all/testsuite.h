@@ -15,6 +15,7 @@ extern "C" {
 static void mavlink_test_ardupilotmega(uint8_t, uint8_t, mavlink_message_t *last_msg);
 static void mavlink_test_ASLUAV(uint8_t, uint8_t, mavlink_message_t *last_msg);
 static void mavlink_test_common(uint8_t, uint8_t, mavlink_message_t *last_msg);
+static void mavlink_test_fuel_cell(uint8_t, uint8_t, mavlink_message_t *last_msg);
 static void mavlink_test_development(uint8_t, uint8_t, mavlink_message_t *last_msg);
 static void mavlink_test_icarous(uint8_t, uint8_t, mavlink_message_t *last_msg);
 static void mavlink_test_minimal(uint8_t, uint8_t, mavlink_message_t *last_msg);
@@ -35,6 +36,7 @@ static void mavlink_test_all(uint8_t system_id, uint8_t component_id, mavlink_me
     mavlink_test_ardupilotmega(system_id, component_id, last_msg);
     mavlink_test_ASLUAV(system_id, component_id, last_msg);
     mavlink_test_common(system_id, component_id, last_msg);
+    mavlink_test_fuel_cell(system_id, component_id, last_msg);
     mavlink_test_development(system_id, component_id, last_msg);
     mavlink_test_icarous(system_id, component_id, last_msg);
     mavlink_test_minimal(system_id, component_id, last_msg);
@@ -55,6 +57,7 @@ static void mavlink_test_all(uint8_t system_id, uint8_t component_id, mavlink_me
 #include "../ardupilotmega/testsuite.h"
 #include "../ASLUAV/testsuite.h"
 #include "../common/testsuite.h"
+#include "../fuel_cell/testsuite.h"
 #include "../development/testsuite.h"
 #include "../icarous/testsuite.h"
 #include "../minimal/testsuite.h"
