@@ -6,8 +6,6 @@
 
 typedef struct __mavlink_fuel_cell_status_t {
  uint32_t response_request_id; /*<  Request ID associated with control_result. Zero means no request has been processed.*/
- uint16_t bus_voltage; /*<  Flight-controller-owned bus voltage currently used in CAN control frames, in 0.1 V. Read-only telemetry, not a device acknowledgement.*/
- uint16_t bus_current; /*<  Flight-controller-owned bus current currently used in CAN control frames, in 0.1 A. Read-only telemetry, not a device acknowledgement.*/
  uint16_t requested_power; /*< [W] Flight-controller-owned requested power currently used in CAN control frames. Read-only telemetry, not a device acknowledgement.*/
  uint16_t soc; /*< [d%] Last valid device lithium battery state of charge, in 0.1 percent. Valid only while connection_state is OK.*/
  uint16_t dcdc_output_current; /*<  Last valid device DCDC output current, in 0.1 A. All raw values from 0 to 65535 are valid. Read-only telemetry independent of the PMU bus current. Retained after disconnection and valid only while connection_state is OK.*/
@@ -17,13 +15,13 @@ typedef struct __mavlink_fuel_cell_status_t {
  uint8_t connection_state; /*<  Current fuel cell controller connection state.*/
 } mavlink_fuel_cell_status_t;
 
-#define MAVLINK_MSG_ID_FUEL_CELL_STATUS_LEN 18
-#define MAVLINK_MSG_ID_FUEL_CELL_STATUS_MIN_LEN 18
-#define MAVLINK_MSG_ID_61001_LEN 18
-#define MAVLINK_MSG_ID_61001_MIN_LEN 18
+#define MAVLINK_MSG_ID_FUEL_CELL_STATUS_LEN 14
+#define MAVLINK_MSG_ID_FUEL_CELL_STATUS_MIN_LEN 14
+#define MAVLINK_MSG_ID_61001_LEN 14
+#define MAVLINK_MSG_ID_61001_MIN_LEN 14
 
-#define MAVLINK_MSG_ID_FUEL_CELL_STATUS_CRC 135
-#define MAVLINK_MSG_ID_61001_CRC 135
+#define MAVLINK_MSG_ID_FUEL_CELL_STATUS_CRC 218
+#define MAVLINK_MSG_ID_61001_CRC 218
 
 
 
@@ -31,33 +29,29 @@ typedef struct __mavlink_fuel_cell_status_t {
 #define MAVLINK_MESSAGE_INFO_FUEL_CELL_STATUS { \
     61001, \
     "FUEL_CELL_STATUS", \
-    10, \
+    8, \
     {  { "response_request_id", NULL, MAVLINK_TYPE_UINT32_T, 0, 0, offsetof(mavlink_fuel_cell_status_t, response_request_id) }, \
-         { "bus_voltage", NULL, MAVLINK_TYPE_UINT16_T, 0, 4, offsetof(mavlink_fuel_cell_status_t, bus_voltage) }, \
-         { "bus_current", NULL, MAVLINK_TYPE_UINT16_T, 0, 6, offsetof(mavlink_fuel_cell_status_t, bus_current) }, \
-         { "requested_power", NULL, MAVLINK_TYPE_UINT16_T, 0, 8, offsetof(mavlink_fuel_cell_status_t, requested_power) }, \
-         { "soc", NULL, MAVLINK_TYPE_UINT16_T, 0, 10, offsetof(mavlink_fuel_cell_status_t, soc) }, \
-         { "dcdc_output_current", NULL, MAVLINK_TYPE_UINT16_T, 0, 12, offsetof(mavlink_fuel_cell_status_t, dcdc_output_current) }, \
-         { "device_state", NULL, MAVLINK_TYPE_UINT8_T, 0, 14, offsetof(mavlink_fuel_cell_status_t, device_state) }, \
-         { "control_command", NULL, MAVLINK_TYPE_UINT8_T, 0, 15, offsetof(mavlink_fuel_cell_status_t, control_command) }, \
-         { "control_result", NULL, MAVLINK_TYPE_UINT8_T, 0, 16, offsetof(mavlink_fuel_cell_status_t, control_result) }, \
-         { "connection_state", NULL, MAVLINK_TYPE_UINT8_T, 0, 17, offsetof(mavlink_fuel_cell_status_t, connection_state) }, \
+         { "requested_power", NULL, MAVLINK_TYPE_UINT16_T, 0, 4, offsetof(mavlink_fuel_cell_status_t, requested_power) }, \
+         { "soc", NULL, MAVLINK_TYPE_UINT16_T, 0, 6, offsetof(mavlink_fuel_cell_status_t, soc) }, \
+         { "dcdc_output_current", NULL, MAVLINK_TYPE_UINT16_T, 0, 8, offsetof(mavlink_fuel_cell_status_t, dcdc_output_current) }, \
+         { "device_state", NULL, MAVLINK_TYPE_UINT8_T, 0, 10, offsetof(mavlink_fuel_cell_status_t, device_state) }, \
+         { "control_command", NULL, MAVLINK_TYPE_UINT8_T, 0, 11, offsetof(mavlink_fuel_cell_status_t, control_command) }, \
+         { "control_result", NULL, MAVLINK_TYPE_UINT8_T, 0, 12, offsetof(mavlink_fuel_cell_status_t, control_result) }, \
+         { "connection_state", NULL, MAVLINK_TYPE_UINT8_T, 0, 13, offsetof(mavlink_fuel_cell_status_t, connection_state) }, \
          } \
 }
 #else
 #define MAVLINK_MESSAGE_INFO_FUEL_CELL_STATUS { \
     "FUEL_CELL_STATUS", \
-    10, \
+    8, \
     {  { "response_request_id", NULL, MAVLINK_TYPE_UINT32_T, 0, 0, offsetof(mavlink_fuel_cell_status_t, response_request_id) }, \
-         { "bus_voltage", NULL, MAVLINK_TYPE_UINT16_T, 0, 4, offsetof(mavlink_fuel_cell_status_t, bus_voltage) }, \
-         { "bus_current", NULL, MAVLINK_TYPE_UINT16_T, 0, 6, offsetof(mavlink_fuel_cell_status_t, bus_current) }, \
-         { "requested_power", NULL, MAVLINK_TYPE_UINT16_T, 0, 8, offsetof(mavlink_fuel_cell_status_t, requested_power) }, \
-         { "soc", NULL, MAVLINK_TYPE_UINT16_T, 0, 10, offsetof(mavlink_fuel_cell_status_t, soc) }, \
-         { "dcdc_output_current", NULL, MAVLINK_TYPE_UINT16_T, 0, 12, offsetof(mavlink_fuel_cell_status_t, dcdc_output_current) }, \
-         { "device_state", NULL, MAVLINK_TYPE_UINT8_T, 0, 14, offsetof(mavlink_fuel_cell_status_t, device_state) }, \
-         { "control_command", NULL, MAVLINK_TYPE_UINT8_T, 0, 15, offsetof(mavlink_fuel_cell_status_t, control_command) }, \
-         { "control_result", NULL, MAVLINK_TYPE_UINT8_T, 0, 16, offsetof(mavlink_fuel_cell_status_t, control_result) }, \
-         { "connection_state", NULL, MAVLINK_TYPE_UINT8_T, 0, 17, offsetof(mavlink_fuel_cell_status_t, connection_state) }, \
+         { "requested_power", NULL, MAVLINK_TYPE_UINT16_T, 0, 4, offsetof(mavlink_fuel_cell_status_t, requested_power) }, \
+         { "soc", NULL, MAVLINK_TYPE_UINT16_T, 0, 6, offsetof(mavlink_fuel_cell_status_t, soc) }, \
+         { "dcdc_output_current", NULL, MAVLINK_TYPE_UINT16_T, 0, 8, offsetof(mavlink_fuel_cell_status_t, dcdc_output_current) }, \
+         { "device_state", NULL, MAVLINK_TYPE_UINT8_T, 0, 10, offsetof(mavlink_fuel_cell_status_t, device_state) }, \
+         { "control_command", NULL, MAVLINK_TYPE_UINT8_T, 0, 11, offsetof(mavlink_fuel_cell_status_t, control_command) }, \
+         { "control_result", NULL, MAVLINK_TYPE_UINT8_T, 0, 12, offsetof(mavlink_fuel_cell_status_t, control_result) }, \
+         { "connection_state", NULL, MAVLINK_TYPE_UINT8_T, 0, 13, offsetof(mavlink_fuel_cell_status_t, connection_state) }, \
          } \
 }
 #endif
@@ -69,8 +63,6 @@ typedef struct __mavlink_fuel_cell_status_t {
  * @param msg The MAVLink message to compress the data into
  *
  * @param response_request_id  Request ID associated with control_result. Zero means no request has been processed.
- * @param bus_voltage  Flight-controller-owned bus voltage currently used in CAN control frames, in 0.1 V. Read-only telemetry, not a device acknowledgement.
- * @param bus_current  Flight-controller-owned bus current currently used in CAN control frames, in 0.1 A. Read-only telemetry, not a device acknowledgement.
  * @param requested_power [W] Flight-controller-owned requested power currently used in CAN control frames. Read-only telemetry, not a device acknowledgement.
  * @param soc [d%] Last valid device lithium battery state of charge, in 0.1 percent. Valid only while connection_state is OK.
  * @param dcdc_output_current  Last valid device DCDC output current, in 0.1 A. All raw values from 0 to 65535 are valid. Read-only telemetry independent of the PMU bus current. Retained after disconnection and valid only while connection_state is OK.
@@ -81,27 +73,23 @@ typedef struct __mavlink_fuel_cell_status_t {
  * @return length of the message in bytes (excluding serial stream start sign)
  */
 static inline uint16_t mavlink_msg_fuel_cell_status_pack(uint8_t system_id, uint8_t component_id, mavlink_message_t* msg,
-                               uint32_t response_request_id, uint16_t bus_voltage, uint16_t bus_current, uint16_t requested_power, uint16_t soc, uint16_t dcdc_output_current, uint8_t device_state, uint8_t control_command, uint8_t control_result, uint8_t connection_state)
+                               uint32_t response_request_id, uint16_t requested_power, uint16_t soc, uint16_t dcdc_output_current, uint8_t device_state, uint8_t control_command, uint8_t control_result, uint8_t connection_state)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
     char buf[MAVLINK_MSG_ID_FUEL_CELL_STATUS_LEN];
     _mav_put_uint32_t(buf, 0, response_request_id);
-    _mav_put_uint16_t(buf, 4, bus_voltage);
-    _mav_put_uint16_t(buf, 6, bus_current);
-    _mav_put_uint16_t(buf, 8, requested_power);
-    _mav_put_uint16_t(buf, 10, soc);
-    _mav_put_uint16_t(buf, 12, dcdc_output_current);
-    _mav_put_uint8_t(buf, 14, device_state);
-    _mav_put_uint8_t(buf, 15, control_command);
-    _mav_put_uint8_t(buf, 16, control_result);
-    _mav_put_uint8_t(buf, 17, connection_state);
+    _mav_put_uint16_t(buf, 4, requested_power);
+    _mav_put_uint16_t(buf, 6, soc);
+    _mav_put_uint16_t(buf, 8, dcdc_output_current);
+    _mav_put_uint8_t(buf, 10, device_state);
+    _mav_put_uint8_t(buf, 11, control_command);
+    _mav_put_uint8_t(buf, 12, control_result);
+    _mav_put_uint8_t(buf, 13, connection_state);
 
         memcpy(_MAV_PAYLOAD_NON_CONST(msg), buf, MAVLINK_MSG_ID_FUEL_CELL_STATUS_LEN);
 #else
     mavlink_fuel_cell_status_t packet;
     packet.response_request_id = response_request_id;
-    packet.bus_voltage = bus_voltage;
-    packet.bus_current = bus_current;
     packet.requested_power = requested_power;
     packet.soc = soc;
     packet.dcdc_output_current = dcdc_output_current;
@@ -125,8 +113,6 @@ static inline uint16_t mavlink_msg_fuel_cell_status_pack(uint8_t system_id, uint
  * @param msg The MAVLink message to compress the data into
  *
  * @param response_request_id  Request ID associated with control_result. Zero means no request has been processed.
- * @param bus_voltage  Flight-controller-owned bus voltage currently used in CAN control frames, in 0.1 V. Read-only telemetry, not a device acknowledgement.
- * @param bus_current  Flight-controller-owned bus current currently used in CAN control frames, in 0.1 A. Read-only telemetry, not a device acknowledgement.
  * @param requested_power [W] Flight-controller-owned requested power currently used in CAN control frames. Read-only telemetry, not a device acknowledgement.
  * @param soc [d%] Last valid device lithium battery state of charge, in 0.1 percent. Valid only while connection_state is OK.
  * @param dcdc_output_current  Last valid device DCDC output current, in 0.1 A. All raw values from 0 to 65535 are valid. Read-only telemetry independent of the PMU bus current. Retained after disconnection and valid only while connection_state is OK.
@@ -137,27 +123,23 @@ static inline uint16_t mavlink_msg_fuel_cell_status_pack(uint8_t system_id, uint
  * @return length of the message in bytes (excluding serial stream start sign)
  */
 static inline uint16_t mavlink_msg_fuel_cell_status_pack_status(uint8_t system_id, uint8_t component_id, mavlink_status_t *_status, mavlink_message_t* msg,
-                               uint32_t response_request_id, uint16_t bus_voltage, uint16_t bus_current, uint16_t requested_power, uint16_t soc, uint16_t dcdc_output_current, uint8_t device_state, uint8_t control_command, uint8_t control_result, uint8_t connection_state)
+                               uint32_t response_request_id, uint16_t requested_power, uint16_t soc, uint16_t dcdc_output_current, uint8_t device_state, uint8_t control_command, uint8_t control_result, uint8_t connection_state)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
     char buf[MAVLINK_MSG_ID_FUEL_CELL_STATUS_LEN];
     _mav_put_uint32_t(buf, 0, response_request_id);
-    _mav_put_uint16_t(buf, 4, bus_voltage);
-    _mav_put_uint16_t(buf, 6, bus_current);
-    _mav_put_uint16_t(buf, 8, requested_power);
-    _mav_put_uint16_t(buf, 10, soc);
-    _mav_put_uint16_t(buf, 12, dcdc_output_current);
-    _mav_put_uint8_t(buf, 14, device_state);
-    _mav_put_uint8_t(buf, 15, control_command);
-    _mav_put_uint8_t(buf, 16, control_result);
-    _mav_put_uint8_t(buf, 17, connection_state);
+    _mav_put_uint16_t(buf, 4, requested_power);
+    _mav_put_uint16_t(buf, 6, soc);
+    _mav_put_uint16_t(buf, 8, dcdc_output_current);
+    _mav_put_uint8_t(buf, 10, device_state);
+    _mav_put_uint8_t(buf, 11, control_command);
+    _mav_put_uint8_t(buf, 12, control_result);
+    _mav_put_uint8_t(buf, 13, connection_state);
 
         memcpy(_MAV_PAYLOAD_NON_CONST(msg), buf, MAVLINK_MSG_ID_FUEL_CELL_STATUS_LEN);
 #else
     mavlink_fuel_cell_status_t packet;
     packet.response_request_id = response_request_id;
-    packet.bus_voltage = bus_voltage;
-    packet.bus_current = bus_current;
     packet.requested_power = requested_power;
     packet.soc = soc;
     packet.dcdc_output_current = dcdc_output_current;
@@ -184,8 +166,6 @@ static inline uint16_t mavlink_msg_fuel_cell_status_pack_status(uint8_t system_i
  * @param chan The MAVLink channel this message will be sent over
  * @param msg The MAVLink message to compress the data into
  * @param response_request_id  Request ID associated with control_result. Zero means no request has been processed.
- * @param bus_voltage  Flight-controller-owned bus voltage currently used in CAN control frames, in 0.1 V. Read-only telemetry, not a device acknowledgement.
- * @param bus_current  Flight-controller-owned bus current currently used in CAN control frames, in 0.1 A. Read-only telemetry, not a device acknowledgement.
  * @param requested_power [W] Flight-controller-owned requested power currently used in CAN control frames. Read-only telemetry, not a device acknowledgement.
  * @param soc [d%] Last valid device lithium battery state of charge, in 0.1 percent. Valid only while connection_state is OK.
  * @param dcdc_output_current  Last valid device DCDC output current, in 0.1 A. All raw values from 0 to 65535 are valid. Read-only telemetry independent of the PMU bus current. Retained after disconnection and valid only while connection_state is OK.
@@ -197,27 +177,23 @@ static inline uint16_t mavlink_msg_fuel_cell_status_pack_status(uint8_t system_i
  */
 static inline uint16_t mavlink_msg_fuel_cell_status_pack_chan(uint8_t system_id, uint8_t component_id, uint8_t chan,
                                mavlink_message_t* msg,
-                                   uint32_t response_request_id,uint16_t bus_voltage,uint16_t bus_current,uint16_t requested_power,uint16_t soc,uint16_t dcdc_output_current,uint8_t device_state,uint8_t control_command,uint8_t control_result,uint8_t connection_state)
+                                   uint32_t response_request_id,uint16_t requested_power,uint16_t soc,uint16_t dcdc_output_current,uint8_t device_state,uint8_t control_command,uint8_t control_result,uint8_t connection_state)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
     char buf[MAVLINK_MSG_ID_FUEL_CELL_STATUS_LEN];
     _mav_put_uint32_t(buf, 0, response_request_id);
-    _mav_put_uint16_t(buf, 4, bus_voltage);
-    _mav_put_uint16_t(buf, 6, bus_current);
-    _mav_put_uint16_t(buf, 8, requested_power);
-    _mav_put_uint16_t(buf, 10, soc);
-    _mav_put_uint16_t(buf, 12, dcdc_output_current);
-    _mav_put_uint8_t(buf, 14, device_state);
-    _mav_put_uint8_t(buf, 15, control_command);
-    _mav_put_uint8_t(buf, 16, control_result);
-    _mav_put_uint8_t(buf, 17, connection_state);
+    _mav_put_uint16_t(buf, 4, requested_power);
+    _mav_put_uint16_t(buf, 6, soc);
+    _mav_put_uint16_t(buf, 8, dcdc_output_current);
+    _mav_put_uint8_t(buf, 10, device_state);
+    _mav_put_uint8_t(buf, 11, control_command);
+    _mav_put_uint8_t(buf, 12, control_result);
+    _mav_put_uint8_t(buf, 13, connection_state);
 
         memcpy(_MAV_PAYLOAD_NON_CONST(msg), buf, MAVLINK_MSG_ID_FUEL_CELL_STATUS_LEN);
 #else
     mavlink_fuel_cell_status_t packet;
     packet.response_request_id = response_request_id;
-    packet.bus_voltage = bus_voltage;
-    packet.bus_current = bus_current;
     packet.requested_power = requested_power;
     packet.soc = soc;
     packet.dcdc_output_current = dcdc_output_current;
@@ -243,7 +219,7 @@ static inline uint16_t mavlink_msg_fuel_cell_status_pack_chan(uint8_t system_id,
  */
 static inline uint16_t mavlink_msg_fuel_cell_status_encode(uint8_t system_id, uint8_t component_id, mavlink_message_t* msg, const mavlink_fuel_cell_status_t* fuel_cell_status)
 {
-    return mavlink_msg_fuel_cell_status_pack(system_id, component_id, msg, fuel_cell_status->response_request_id, fuel_cell_status->bus_voltage, fuel_cell_status->bus_current, fuel_cell_status->requested_power, fuel_cell_status->soc, fuel_cell_status->dcdc_output_current, fuel_cell_status->device_state, fuel_cell_status->control_command, fuel_cell_status->control_result, fuel_cell_status->connection_state);
+    return mavlink_msg_fuel_cell_status_pack(system_id, component_id, msg, fuel_cell_status->response_request_id, fuel_cell_status->requested_power, fuel_cell_status->soc, fuel_cell_status->dcdc_output_current, fuel_cell_status->device_state, fuel_cell_status->control_command, fuel_cell_status->control_result, fuel_cell_status->connection_state);
 }
 
 /**
@@ -257,7 +233,7 @@ static inline uint16_t mavlink_msg_fuel_cell_status_encode(uint8_t system_id, ui
  */
 static inline uint16_t mavlink_msg_fuel_cell_status_encode_chan(uint8_t system_id, uint8_t component_id, uint8_t chan, mavlink_message_t* msg, const mavlink_fuel_cell_status_t* fuel_cell_status)
 {
-    return mavlink_msg_fuel_cell_status_pack_chan(system_id, component_id, chan, msg, fuel_cell_status->response_request_id, fuel_cell_status->bus_voltage, fuel_cell_status->bus_current, fuel_cell_status->requested_power, fuel_cell_status->soc, fuel_cell_status->dcdc_output_current, fuel_cell_status->device_state, fuel_cell_status->control_command, fuel_cell_status->control_result, fuel_cell_status->connection_state);
+    return mavlink_msg_fuel_cell_status_pack_chan(system_id, component_id, chan, msg, fuel_cell_status->response_request_id, fuel_cell_status->requested_power, fuel_cell_status->soc, fuel_cell_status->dcdc_output_current, fuel_cell_status->device_state, fuel_cell_status->control_command, fuel_cell_status->control_result, fuel_cell_status->connection_state);
 }
 
 /**
@@ -271,7 +247,7 @@ static inline uint16_t mavlink_msg_fuel_cell_status_encode_chan(uint8_t system_i
  */
 static inline uint16_t mavlink_msg_fuel_cell_status_encode_status(uint8_t system_id, uint8_t component_id, mavlink_status_t* _status, mavlink_message_t* msg, const mavlink_fuel_cell_status_t* fuel_cell_status)
 {
-    return mavlink_msg_fuel_cell_status_pack_status(system_id, component_id, _status, msg,  fuel_cell_status->response_request_id, fuel_cell_status->bus_voltage, fuel_cell_status->bus_current, fuel_cell_status->requested_power, fuel_cell_status->soc, fuel_cell_status->dcdc_output_current, fuel_cell_status->device_state, fuel_cell_status->control_command, fuel_cell_status->control_result, fuel_cell_status->connection_state);
+    return mavlink_msg_fuel_cell_status_pack_status(system_id, component_id, _status, msg,  fuel_cell_status->response_request_id, fuel_cell_status->requested_power, fuel_cell_status->soc, fuel_cell_status->dcdc_output_current, fuel_cell_status->device_state, fuel_cell_status->control_command, fuel_cell_status->control_result, fuel_cell_status->connection_state);
 }
 
 /**
@@ -279,8 +255,6 @@ static inline uint16_t mavlink_msg_fuel_cell_status_encode_status(uint8_t system
  * @param chan MAVLink channel to send the message
  *
  * @param response_request_id  Request ID associated with control_result. Zero means no request has been processed.
- * @param bus_voltage  Flight-controller-owned bus voltage currently used in CAN control frames, in 0.1 V. Read-only telemetry, not a device acknowledgement.
- * @param bus_current  Flight-controller-owned bus current currently used in CAN control frames, in 0.1 A. Read-only telemetry, not a device acknowledgement.
  * @param requested_power [W] Flight-controller-owned requested power currently used in CAN control frames. Read-only telemetry, not a device acknowledgement.
  * @param soc [d%] Last valid device lithium battery state of charge, in 0.1 percent. Valid only while connection_state is OK.
  * @param dcdc_output_current  Last valid device DCDC output current, in 0.1 A. All raw values from 0 to 65535 are valid. Read-only telemetry independent of the PMU bus current. Retained after disconnection and valid only while connection_state is OK.
@@ -291,27 +265,23 @@ static inline uint16_t mavlink_msg_fuel_cell_status_encode_status(uint8_t system
  */
 #ifdef MAVLINK_USE_CONVENIENCE_FUNCTIONS
 
-static inline void mavlink_msg_fuel_cell_status_send(mavlink_channel_t chan, uint32_t response_request_id, uint16_t bus_voltage, uint16_t bus_current, uint16_t requested_power, uint16_t soc, uint16_t dcdc_output_current, uint8_t device_state, uint8_t control_command, uint8_t control_result, uint8_t connection_state)
+static inline void mavlink_msg_fuel_cell_status_send(mavlink_channel_t chan, uint32_t response_request_id, uint16_t requested_power, uint16_t soc, uint16_t dcdc_output_current, uint8_t device_state, uint8_t control_command, uint8_t control_result, uint8_t connection_state)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
     char buf[MAVLINK_MSG_ID_FUEL_CELL_STATUS_LEN];
     _mav_put_uint32_t(buf, 0, response_request_id);
-    _mav_put_uint16_t(buf, 4, bus_voltage);
-    _mav_put_uint16_t(buf, 6, bus_current);
-    _mav_put_uint16_t(buf, 8, requested_power);
-    _mav_put_uint16_t(buf, 10, soc);
-    _mav_put_uint16_t(buf, 12, dcdc_output_current);
-    _mav_put_uint8_t(buf, 14, device_state);
-    _mav_put_uint8_t(buf, 15, control_command);
-    _mav_put_uint8_t(buf, 16, control_result);
-    _mav_put_uint8_t(buf, 17, connection_state);
+    _mav_put_uint16_t(buf, 4, requested_power);
+    _mav_put_uint16_t(buf, 6, soc);
+    _mav_put_uint16_t(buf, 8, dcdc_output_current);
+    _mav_put_uint8_t(buf, 10, device_state);
+    _mav_put_uint8_t(buf, 11, control_command);
+    _mav_put_uint8_t(buf, 12, control_result);
+    _mav_put_uint8_t(buf, 13, connection_state);
 
     _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_FUEL_CELL_STATUS, buf, MAVLINK_MSG_ID_FUEL_CELL_STATUS_MIN_LEN, MAVLINK_MSG_ID_FUEL_CELL_STATUS_LEN, MAVLINK_MSG_ID_FUEL_CELL_STATUS_CRC);
 #else
     mavlink_fuel_cell_status_t packet;
     packet.response_request_id = response_request_id;
-    packet.bus_voltage = bus_voltage;
-    packet.bus_current = bus_current;
     packet.requested_power = requested_power;
     packet.soc = soc;
     packet.dcdc_output_current = dcdc_output_current;
@@ -332,7 +302,7 @@ static inline void mavlink_msg_fuel_cell_status_send(mavlink_channel_t chan, uin
 static inline void mavlink_msg_fuel_cell_status_send_struct(mavlink_channel_t chan, const mavlink_fuel_cell_status_t* fuel_cell_status)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
-    mavlink_msg_fuel_cell_status_send(chan, fuel_cell_status->response_request_id, fuel_cell_status->bus_voltage, fuel_cell_status->bus_current, fuel_cell_status->requested_power, fuel_cell_status->soc, fuel_cell_status->dcdc_output_current, fuel_cell_status->device_state, fuel_cell_status->control_command, fuel_cell_status->control_result, fuel_cell_status->connection_state);
+    mavlink_msg_fuel_cell_status_send(chan, fuel_cell_status->response_request_id, fuel_cell_status->requested_power, fuel_cell_status->soc, fuel_cell_status->dcdc_output_current, fuel_cell_status->device_state, fuel_cell_status->control_command, fuel_cell_status->control_result, fuel_cell_status->connection_state);
 #else
     _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_FUEL_CELL_STATUS, (const char *)fuel_cell_status, MAVLINK_MSG_ID_FUEL_CELL_STATUS_MIN_LEN, MAVLINK_MSG_ID_FUEL_CELL_STATUS_LEN, MAVLINK_MSG_ID_FUEL_CELL_STATUS_CRC);
 #endif
@@ -346,27 +316,23 @@ static inline void mavlink_msg_fuel_cell_status_send_struct(mavlink_channel_t ch
   is usually the receive buffer for the channel, and allows a reply to an
   incoming message with minimum stack space usage.
  */
-static inline void mavlink_msg_fuel_cell_status_send_buf(mavlink_message_t *msgbuf, mavlink_channel_t chan,  uint32_t response_request_id, uint16_t bus_voltage, uint16_t bus_current, uint16_t requested_power, uint16_t soc, uint16_t dcdc_output_current, uint8_t device_state, uint8_t control_command, uint8_t control_result, uint8_t connection_state)
+static inline void mavlink_msg_fuel_cell_status_send_buf(mavlink_message_t *msgbuf, mavlink_channel_t chan,  uint32_t response_request_id, uint16_t requested_power, uint16_t soc, uint16_t dcdc_output_current, uint8_t device_state, uint8_t control_command, uint8_t control_result, uint8_t connection_state)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
     char *buf = (char *)msgbuf;
     _mav_put_uint32_t(buf, 0, response_request_id);
-    _mav_put_uint16_t(buf, 4, bus_voltage);
-    _mav_put_uint16_t(buf, 6, bus_current);
-    _mav_put_uint16_t(buf, 8, requested_power);
-    _mav_put_uint16_t(buf, 10, soc);
-    _mav_put_uint16_t(buf, 12, dcdc_output_current);
-    _mav_put_uint8_t(buf, 14, device_state);
-    _mav_put_uint8_t(buf, 15, control_command);
-    _mav_put_uint8_t(buf, 16, control_result);
-    _mav_put_uint8_t(buf, 17, connection_state);
+    _mav_put_uint16_t(buf, 4, requested_power);
+    _mav_put_uint16_t(buf, 6, soc);
+    _mav_put_uint16_t(buf, 8, dcdc_output_current);
+    _mav_put_uint8_t(buf, 10, device_state);
+    _mav_put_uint8_t(buf, 11, control_command);
+    _mav_put_uint8_t(buf, 12, control_result);
+    _mav_put_uint8_t(buf, 13, connection_state);
 
     _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_FUEL_CELL_STATUS, buf, MAVLINK_MSG_ID_FUEL_CELL_STATUS_MIN_LEN, MAVLINK_MSG_ID_FUEL_CELL_STATUS_LEN, MAVLINK_MSG_ID_FUEL_CELL_STATUS_CRC);
 #else
     mavlink_fuel_cell_status_t *packet = (mavlink_fuel_cell_status_t *)msgbuf;
     packet->response_request_id = response_request_id;
-    packet->bus_voltage = bus_voltage;
-    packet->bus_current = bus_current;
     packet->requested_power = requested_power;
     packet->soc = soc;
     packet->dcdc_output_current = dcdc_output_current;
@@ -396,33 +362,13 @@ static inline uint32_t mavlink_msg_fuel_cell_status_get_response_request_id(cons
 }
 
 /**
- * @brief Get field bus_voltage from fuel_cell_status message
- *
- * @return  Flight-controller-owned bus voltage currently used in CAN control frames, in 0.1 V. Read-only telemetry, not a device acknowledgement.
- */
-static inline uint16_t mavlink_msg_fuel_cell_status_get_bus_voltage(const mavlink_message_t* msg)
-{
-    return _MAV_RETURN_uint16_t(msg,  4);
-}
-
-/**
- * @brief Get field bus_current from fuel_cell_status message
- *
- * @return  Flight-controller-owned bus current currently used in CAN control frames, in 0.1 A. Read-only telemetry, not a device acknowledgement.
- */
-static inline uint16_t mavlink_msg_fuel_cell_status_get_bus_current(const mavlink_message_t* msg)
-{
-    return _MAV_RETURN_uint16_t(msg,  6);
-}
-
-/**
  * @brief Get field requested_power from fuel_cell_status message
  *
  * @return [W] Flight-controller-owned requested power currently used in CAN control frames. Read-only telemetry, not a device acknowledgement.
  */
 static inline uint16_t mavlink_msg_fuel_cell_status_get_requested_power(const mavlink_message_t* msg)
 {
-    return _MAV_RETURN_uint16_t(msg,  8);
+    return _MAV_RETURN_uint16_t(msg,  4);
 }
 
 /**
@@ -432,7 +378,7 @@ static inline uint16_t mavlink_msg_fuel_cell_status_get_requested_power(const ma
  */
 static inline uint16_t mavlink_msg_fuel_cell_status_get_soc(const mavlink_message_t* msg)
 {
-    return _MAV_RETURN_uint16_t(msg,  10);
+    return _MAV_RETURN_uint16_t(msg,  6);
 }
 
 /**
@@ -442,7 +388,7 @@ static inline uint16_t mavlink_msg_fuel_cell_status_get_soc(const mavlink_messag
  */
 static inline uint16_t mavlink_msg_fuel_cell_status_get_dcdc_output_current(const mavlink_message_t* msg)
 {
-    return _MAV_RETURN_uint16_t(msg,  12);
+    return _MAV_RETURN_uint16_t(msg,  8);
 }
 
 /**
@@ -452,7 +398,7 @@ static inline uint16_t mavlink_msg_fuel_cell_status_get_dcdc_output_current(cons
  */
 static inline uint8_t mavlink_msg_fuel_cell_status_get_device_state(const mavlink_message_t* msg)
 {
-    return _MAV_RETURN_uint8_t(msg,  14);
+    return _MAV_RETURN_uint8_t(msg,  10);
 }
 
 /**
@@ -462,7 +408,7 @@ static inline uint8_t mavlink_msg_fuel_cell_status_get_device_state(const mavlin
  */
 static inline uint8_t mavlink_msg_fuel_cell_status_get_control_command(const mavlink_message_t* msg)
 {
-    return _MAV_RETURN_uint8_t(msg,  15);
+    return _MAV_RETURN_uint8_t(msg,  11);
 }
 
 /**
@@ -472,7 +418,7 @@ static inline uint8_t mavlink_msg_fuel_cell_status_get_control_command(const mav
  */
 static inline uint8_t mavlink_msg_fuel_cell_status_get_control_result(const mavlink_message_t* msg)
 {
-    return _MAV_RETURN_uint8_t(msg,  16);
+    return _MAV_RETURN_uint8_t(msg,  12);
 }
 
 /**
@@ -482,7 +428,7 @@ static inline uint8_t mavlink_msg_fuel_cell_status_get_control_result(const mavl
  */
 static inline uint8_t mavlink_msg_fuel_cell_status_get_connection_state(const mavlink_message_t* msg)
 {
-    return _MAV_RETURN_uint8_t(msg,  17);
+    return _MAV_RETURN_uint8_t(msg,  13);
 }
 
 /**
@@ -495,8 +441,6 @@ static inline void mavlink_msg_fuel_cell_status_decode(const mavlink_message_t* 
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
     fuel_cell_status->response_request_id = mavlink_msg_fuel_cell_status_get_response_request_id(msg);
-    fuel_cell_status->bus_voltage = mavlink_msg_fuel_cell_status_get_bus_voltage(msg);
-    fuel_cell_status->bus_current = mavlink_msg_fuel_cell_status_get_bus_current(msg);
     fuel_cell_status->requested_power = mavlink_msg_fuel_cell_status_get_requested_power(msg);
     fuel_cell_status->soc = mavlink_msg_fuel_cell_status_get_soc(msg);
     fuel_cell_status->dcdc_output_current = mavlink_msg_fuel_cell_status_get_dcdc_output_current(msg);
