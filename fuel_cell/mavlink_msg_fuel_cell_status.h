@@ -7,8 +7,8 @@
 typedef struct __mavlink_fuel_cell_status_t {
  uint32_t response_request_id; /*<  Request ID associated with control_result. Zero means no request has been processed.*/
  uint16_t requested_power; /*< [W] Flight-controller-owned requested power currently used in CAN control frames. Read-only telemetry, not a device acknowledgement.*/
- uint16_t soc; /*< [d%] Last valid device lithium battery state of charge, in 0.1 percent. Valid only while connection_state is OK.*/
- uint16_t dcdc_output_current; /*<  Last valid device DCDC output current, in 0.1 A. All raw values from 0 to 65535 are valid. Read-only telemetry independent of the PMU bus current. Retained after disconnection and valid only while connection_state is OK.*/
+ uint16_t soc; /*< [c%] Last valid device lithium battery state of charge, in 0.01 percent. Valid only while connection_state is OK.*/
+ uint16_t dcdc_output_current; /*< [cA] Last valid device DCDC output current, in 0.01 A. All raw values from 0 to 65535 are valid. Read-only telemetry independent of the PMU bus current. Retained after disconnection and valid only while connection_state is OK.*/
  uint8_t device_state; /*<  Last valid raw 4-bit FCS system state. States 0-13 are defined; unknown states 14-15 are forwarded without changing connection health or control permissions. Valid only while connection_state is OK.*/
  uint8_t control_command; /*<  FCS command currently saved and sent by the flight controller. Actual device operation is reported by device_state.*/
  uint8_t control_result; /*<  Processing result for response_request_id. ACCEPTED means that the flight controller saved the command, not that the device completed the operation. TEMPORARILY_REJECTED means that the CAN device is not connected. DENIED means that a cached request identifier was reused with a different command. UNSUPPORTED means that the command is invalid.*/
@@ -64,8 +64,8 @@ typedef struct __mavlink_fuel_cell_status_t {
  *
  * @param response_request_id  Request ID associated with control_result. Zero means no request has been processed.
  * @param requested_power [W] Flight-controller-owned requested power currently used in CAN control frames. Read-only telemetry, not a device acknowledgement.
- * @param soc [d%] Last valid device lithium battery state of charge, in 0.1 percent. Valid only while connection_state is OK.
- * @param dcdc_output_current  Last valid device DCDC output current, in 0.1 A. All raw values from 0 to 65535 are valid. Read-only telemetry independent of the PMU bus current. Retained after disconnection and valid only while connection_state is OK.
+ * @param soc [c%] Last valid device lithium battery state of charge, in 0.01 percent. Valid only while connection_state is OK.
+ * @param dcdc_output_current [cA] Last valid device DCDC output current, in 0.01 A. All raw values from 0 to 65535 are valid. Read-only telemetry independent of the PMU bus current. Retained after disconnection and valid only while connection_state is OK.
  * @param device_state  Last valid raw 4-bit FCS system state. States 0-13 are defined; unknown states 14-15 are forwarded without changing connection health or control permissions. Valid only while connection_state is OK.
  * @param control_command  FCS command currently saved and sent by the flight controller. Actual device operation is reported by device_state.
  * @param control_result  Processing result for response_request_id. ACCEPTED means that the flight controller saved the command, not that the device completed the operation. TEMPORARILY_REJECTED means that the CAN device is not connected. DENIED means that a cached request identifier was reused with a different command. UNSUPPORTED means that the command is invalid.
@@ -114,8 +114,8 @@ static inline uint16_t mavlink_msg_fuel_cell_status_pack(uint8_t system_id, uint
  *
  * @param response_request_id  Request ID associated with control_result. Zero means no request has been processed.
  * @param requested_power [W] Flight-controller-owned requested power currently used in CAN control frames. Read-only telemetry, not a device acknowledgement.
- * @param soc [d%] Last valid device lithium battery state of charge, in 0.1 percent. Valid only while connection_state is OK.
- * @param dcdc_output_current  Last valid device DCDC output current, in 0.1 A. All raw values from 0 to 65535 are valid. Read-only telemetry independent of the PMU bus current. Retained after disconnection and valid only while connection_state is OK.
+ * @param soc [c%] Last valid device lithium battery state of charge, in 0.01 percent. Valid only while connection_state is OK.
+ * @param dcdc_output_current [cA] Last valid device DCDC output current, in 0.01 A. All raw values from 0 to 65535 are valid. Read-only telemetry independent of the PMU bus current. Retained after disconnection and valid only while connection_state is OK.
  * @param device_state  Last valid raw 4-bit FCS system state. States 0-13 are defined; unknown states 14-15 are forwarded without changing connection health or control permissions. Valid only while connection_state is OK.
  * @param control_command  FCS command currently saved and sent by the flight controller. Actual device operation is reported by device_state.
  * @param control_result  Processing result for response_request_id. ACCEPTED means that the flight controller saved the command, not that the device completed the operation. TEMPORARILY_REJECTED means that the CAN device is not connected. DENIED means that a cached request identifier was reused with a different command. UNSUPPORTED means that the command is invalid.
@@ -167,8 +167,8 @@ static inline uint16_t mavlink_msg_fuel_cell_status_pack_status(uint8_t system_i
  * @param msg The MAVLink message to compress the data into
  * @param response_request_id  Request ID associated with control_result. Zero means no request has been processed.
  * @param requested_power [W] Flight-controller-owned requested power currently used in CAN control frames. Read-only telemetry, not a device acknowledgement.
- * @param soc [d%] Last valid device lithium battery state of charge, in 0.1 percent. Valid only while connection_state is OK.
- * @param dcdc_output_current  Last valid device DCDC output current, in 0.1 A. All raw values from 0 to 65535 are valid. Read-only telemetry independent of the PMU bus current. Retained after disconnection and valid only while connection_state is OK.
+ * @param soc [c%] Last valid device lithium battery state of charge, in 0.01 percent. Valid only while connection_state is OK.
+ * @param dcdc_output_current [cA] Last valid device DCDC output current, in 0.01 A. All raw values from 0 to 65535 are valid. Read-only telemetry independent of the PMU bus current. Retained after disconnection and valid only while connection_state is OK.
  * @param device_state  Last valid raw 4-bit FCS system state. States 0-13 are defined; unknown states 14-15 are forwarded without changing connection health or control permissions. Valid only while connection_state is OK.
  * @param control_command  FCS command currently saved and sent by the flight controller. Actual device operation is reported by device_state.
  * @param control_result  Processing result for response_request_id. ACCEPTED means that the flight controller saved the command, not that the device completed the operation. TEMPORARILY_REJECTED means that the CAN device is not connected. DENIED means that a cached request identifier was reused with a different command. UNSUPPORTED means that the command is invalid.
@@ -256,8 +256,8 @@ static inline uint16_t mavlink_msg_fuel_cell_status_encode_status(uint8_t system
  *
  * @param response_request_id  Request ID associated with control_result. Zero means no request has been processed.
  * @param requested_power [W] Flight-controller-owned requested power currently used in CAN control frames. Read-only telemetry, not a device acknowledgement.
- * @param soc [d%] Last valid device lithium battery state of charge, in 0.1 percent. Valid only while connection_state is OK.
- * @param dcdc_output_current  Last valid device DCDC output current, in 0.1 A. All raw values from 0 to 65535 are valid. Read-only telemetry independent of the PMU bus current. Retained after disconnection and valid only while connection_state is OK.
+ * @param soc [c%] Last valid device lithium battery state of charge, in 0.01 percent. Valid only while connection_state is OK.
+ * @param dcdc_output_current [cA] Last valid device DCDC output current, in 0.01 A. All raw values from 0 to 65535 are valid. Read-only telemetry independent of the PMU bus current. Retained after disconnection and valid only while connection_state is OK.
  * @param device_state  Last valid raw 4-bit FCS system state. States 0-13 are defined; unknown states 14-15 are forwarded without changing connection health or control permissions. Valid only while connection_state is OK.
  * @param control_command  FCS command currently saved and sent by the flight controller. Actual device operation is reported by device_state.
  * @param control_result  Processing result for response_request_id. ACCEPTED means that the flight controller saved the command, not that the device completed the operation. TEMPORARILY_REJECTED means that the CAN device is not connected. DENIED means that a cached request identifier was reused with a different command. UNSUPPORTED means that the command is invalid.
@@ -374,7 +374,7 @@ static inline uint16_t mavlink_msg_fuel_cell_status_get_requested_power(const ma
 /**
  * @brief Get field soc from fuel_cell_status message
  *
- * @return [d%] Last valid device lithium battery state of charge, in 0.1 percent. Valid only while connection_state is OK.
+ * @return [c%] Last valid device lithium battery state of charge, in 0.01 percent. Valid only while connection_state is OK.
  */
 static inline uint16_t mavlink_msg_fuel_cell_status_get_soc(const mavlink_message_t* msg)
 {
@@ -384,7 +384,7 @@ static inline uint16_t mavlink_msg_fuel_cell_status_get_soc(const mavlink_messag
 /**
  * @brief Get field dcdc_output_current from fuel_cell_status message
  *
- * @return  Last valid device DCDC output current, in 0.1 A. All raw values from 0 to 65535 are valid. Read-only telemetry independent of the PMU bus current. Retained after disconnection and valid only while connection_state is OK.
+ * @return [cA] Last valid device DCDC output current, in 0.01 A. All raw values from 0 to 65535 are valid. Read-only telemetry independent of the PMU bus current. Retained after disconnection and valid only while connection_state is OK.
  */
 static inline uint16_t mavlink_msg_fuel_cell_status_get_dcdc_output_current(const mavlink_message_t* msg)
 {
